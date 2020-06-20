@@ -56,6 +56,16 @@ public class TestCasesConted {
         System.out.println("Students at number 5 row: " + rs.getString("first_name")+" " + rs.getString("email") +" "+ rs.getString("fee")
         + rs.getString("currency"));
 
+        rs.relative(3);
+        System.out.println("Students at number 5 row: " + rs.getString("first_name")+" " + rs.getString("email") +" "+ rs.getString("fee")
+                + rs.getString("currency"));
+        rs.first();
+        System.out.println("Students at number 5 row: " + rs.getString("first_name")+" " + rs.getString("email") +" "+ rs.getString("fee")
+                + rs.getString("currency"));
+        rs.last();
+        System.out.println("Students at number 5 row: " + rs.getString("first_name")+" " + rs.getString("email") +" "+ rs.getString("fee")
+                + rs.getString("currency"));
+
     }
 
 
