@@ -34,8 +34,12 @@ public class TestCases {
             String ip_address = rs.getString(4);
             System.out.println(name + " " + lastName + " "+gender+" " + ip_address);
         }
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE students SET fee = (fee * ?) WHERE gender = ?;");
+        preparedStatement.setDouble( 1, 0.95);
+        preparedStatement.setString(2, "Male");
+        preparedStatement.executeUpdate();
 
-        statement.executeUpdate("UPDATE students SET ip_address = (ip_address * 10) WHERE gender = 'Female';");
+        //statement.executeUpdate("UPDATE students SET ip_address = (ip_address * 10) WHERE gender = 'Female';");
 
         rs = statement.executeQuery("SELECT first_name, last_name, gender, ip_address FROM students limit 10;");
 
