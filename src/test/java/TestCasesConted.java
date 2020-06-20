@@ -10,7 +10,7 @@ public class TestCasesConted {
 
     @BeforeClass
     public void connect() throws SQLException {
-        String url = "jdbc:mysql://database-techno.c771qxmldhez.us-east-2.rds.amazonaws.com:3306/serdar2225_students_newtest";
+        String url = "jdbc:mysql://database-techno.c771qxmldhez.us-east-2.rds.amazonaws.com:3306/serdar2225_students_new";
         String user = "serdar2225";
         String password = "serdar2225@hotmail.com";
         connection = DriverManager.getConnection(url, user, password);
@@ -35,6 +35,19 @@ public class TestCasesConted {
             System.out.println(name + " " + country + " " + city + " " + postal_code);
         }
 
+    }
+
+    @Test
+    public void highestFeesTest() throws SQLException {
+        ResultSet rs = statement.executeQuery("SELECT first_name, email, fee, currency FROM students_new ORDER BY fee limit 20;");
+
+        while (rs.next()) {
+            String name = rs.getString("first_name");
+            String email = rs.getString("email");
+            String fee = rs.getString("fee");
+            String currency = rs.getString("currency");
+            System.out.println(name + " " + email + " " + fee + " " + currency);
+        }
     }
 
 }
