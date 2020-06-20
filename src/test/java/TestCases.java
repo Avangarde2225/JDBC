@@ -44,10 +44,10 @@ public class TestCases {
         rs = statement.executeQuery("SELECT first_name, last_name, gender, ip_address FROM students limit 10;");
 
         while (rs.next()) {
-            String name = rs.getString(1);
-            String lastName = rs.getString(2);
-            String gender = rs.getString(3);
-            String ip_address = rs.getString(4);
+            String name = rs.getString("first_name");
+            String lastName = rs.getString("last_name");
+            String gender = rs.getString("gender");
+            String ip_address = rs.getString("ip_address");
             System.out.println(name + " " + lastName + " " + gender + " " + ip_address);
         }
     }
