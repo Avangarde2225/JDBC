@@ -103,6 +103,38 @@ public class TestCasesConted {
             System.out.println("fee: " + fee );
         }
     }
+    @Test
+    public void usingPreparedStatement() throws SQLException {
+        String gender="Male";
+        String country = "United States";
+        int toAdd= 10;
+
+        PreparedStatement preparedStatement = connection.prepareStatement("select fee from students_new where gender = ? and country = ? limit 5");
+        preparedStatement.setString(1,gender);
+        preparedStatement.setString(2, country);
+
+
+        ResultSet rs = preparedStatement.executeQuery();
+        while(rs.next()){
+            Double fee = rs.getDouble(1);
+            System.out.println("fee = "+ fee);
+
+        }
+
+        PreparedStatement updateStatement = connection.prepareStatement("UPDATE students_new SET fee = fee + ? WHERE gender = ? and country =?;");
+        updateStatement.setInt(1, toAdd);
+        updateStatement.setString(2, gender);
+        updateStatement.setString(3, country);
+
+        updateStatement.executeUpdate();
+
+        rs = preparedStatement.executeQuery();
+        while(rs.next()){
+            Double fee = rs.getDouble(1);
+            System.out.println("fee = " + fee);
+        }
+
+    }
 
 
 
