@@ -80,6 +80,30 @@ public class TestCasesConted {
         }
     }
 
+    @Test
+    public void updateStudentInfoTest() throws SQLException {
+        ResultSet rs = statement.executeQuery("SELECT first_name, gender, country, fee FROM students_new WHERE gender = 'Male' and country = 'United States' limit 5;");
+        while (rs.next()) {
+            String name = rs.getString("first_name");
+            String gender = rs.getString("gender");
+            Double fee = rs.getDouble("fee");
+            String country = rs.getString("country");
+
+            System.out.println(name + " " + country + " " + gender + fee );
+        }
+
+        statement.executeUpdate("UPDATE students_new SET fee =  fee+10 WHERE gender = 'Male' and country = 'United States'");
+
+        rs = statement.executeQuery("SELECT first_name, gender, country, fee FROM students_new WHERE gender = 'Male' and country = 'United States' limit 5;");
+        while (rs.next()) {
+
+            Double fee = rs.getDouble("fee");
+
+
+            System.out.println("fee: " + fee );
+        }
+    }
+
 
 
     }
