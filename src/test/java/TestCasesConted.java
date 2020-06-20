@@ -68,6 +68,18 @@ public class TestCasesConted {
 
     }
 
+    @Test
+    public void averageFeeIncreaseTest() throws SQLException {
+        ResultSet rs = statement.executeQuery("SELECT first_name, country, avg(fee), currency FROM students_new GROUP BY currency, country limit 10;");
+        while (rs.next()) {
+            String name = rs.getString("first_name");
+            String country = rs.getString("country");
+            Double fee = rs.getDouble("avg(fee)");
+            String currency = rs.getString("currency");
+            System.out.println(name + " " + country + " " + (fee * 1.17) + " " + currency);
+        }
+    }
+
 
 
     }
