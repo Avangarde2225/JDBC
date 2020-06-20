@@ -17,6 +17,7 @@ public class TestCases {
         statement = connection.createStatement();
 
     }
+
     @AfterClass
     public void disconnect() throws SQLException {
         connection.close();
@@ -24,12 +25,26 @@ public class TestCases {
 
     @Test
     public void test() throws SQLException {
-        ResultSet rs= statement.executeQuery("SELECT first_name, last_name, email FROM students;");
-        while (rs.next()){
-            String name =rs.getString(1);
-            String lastName =rs.getString(2);
-            String email =rs.getString(3);
-            System.out.println(name + " " + lastName + " "+ email);
+        ResultSet rs = statement.executeQuery("SELECT first_name, last_name, gender, ip_address FROM students limit 10;");
+
+        while (rs.next()) {
+            String name = rs.getString(1);
+            String lastName = rs.getString(2);
+            String gender = rs.getString(3);
+            String ip_address = rs.getString(4);
+            System.out.println(name + " " + lastName + " "+gender+" " + ip_address);
         }
-}
+
+        statement.executeUpdate("UPDATE students SET ip_address = (ip_address * 10) WHERE gender = 'Female';");
+
+        rs = statement.executeQuery("SELECT first_name, last_name, gender, ip_address FROM students limit 10;");
+
+        while (rs.next()) {
+            String name = rs.getString(1);
+            String lastName = rs.getString(2);
+            String gender = rs.getString(3);
+            String ip_address = rs.getString(4);
+            System.out.println(name + " " + lastName + " " +gender +" "+ ip_address);
+        }
+    }
 }
