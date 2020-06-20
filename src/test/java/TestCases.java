@@ -32,10 +32,10 @@ public class TestCases {
             String lastName = rs.getString(2);
             String gender = rs.getString(3);
             String ip_address = rs.getString(4);
-            System.out.println(name + " " + lastName + " "+gender+" " + ip_address);
+            System.out.println(name + " " + lastName + " " + gender + " " + ip_address);
         }
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE students SET fee = (fee * ?) WHERE gender = ?;");
-        preparedStatement.setDouble( 1, 0.95);
+        preparedStatement.setDouble(1, 0.95);
         preparedStatement.setString(2, "Male");
         preparedStatement.executeUpdate();
 
@@ -48,7 +48,45 @@ public class TestCases {
             String lastName = rs.getString(2);
             String gender = rs.getString(3);
             String ip_address = rs.getString(4);
-            System.out.println(name + " " + lastName + " " +gender +" "+ ip_address);
+            System.out.println(name + " " + lastName + " " + gender + " " + ip_address);
         }
+    }
+
+    @Test
+    public void test2() throws SQLException {
+        ResultSet rs = statement.executeQuery("SELECT first_name, gender, ip_address FROM students limit 10;");
+        String name;
+        String gender;
+        Double ip_address;
+
+        while (rs.next()) {
+            getValuesFromCurrentRow(rs);
+        }
+
+        System.out.println("-------------------------------------------------------");
+        rs.absolute(5); // gettin data from 5th row
+        getValuesFromCurrentRow(rs);
+
+        System.out.println("-------------------------------------------------------");
+        rs.relative(-2); // gettin data from 3rd row
+        getValuesFromCurrentRow(rs);
+
+        System.out.println("-------------------------------------------------------");
+        rs.last(); // gettin data from last row
+        getValuesFromCurrentRow(rs);
+
+        System.out.println("-------------------------------------------------------");
+        rs.previous(); // gettin data from 9th row
+        getValuesFromCurrentRow(rs);
+    }
+
+    private void getValuesFromCurrentRow(ResultSet rs) throws SQLException {
+        String name = rs.getString(1);
+        String gender = rs.getString(2);
+        if (rs.wasNull()) {
+            gender = "<Gender not found!>";
+        }
+        Double ip_address = rs.getDouble(3);
+        System.out.println(name + " " + gender + " " + ip_address );
     }
 }
