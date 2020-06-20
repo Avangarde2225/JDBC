@@ -39,7 +39,7 @@ public class TestCasesConted {
 
     @Test
     public void highestFeesTest() throws SQLException {
-        ResultSet rs = statement.executeQuery("SELECT first_name, email, fee, currency FROM students_new ORDER BY fee limit 20;");
+        ResultSet rs = statement.executeQuery("SELECT first_name, email, fee, currency FROM students_new ORDER BY fee DESC limit 20;");
 
         while (rs.next()) {
             String name = rs.getString("first_name");
@@ -49,5 +49,15 @@ public class TestCasesConted {
             System.out.println(name + " " + email + " " + fee + " " + currency);
         }
     }
+    @Test
+    public void studentsInDifferentRows() throws SQLException {
+        ResultSet rs = statement.executeQuery("SELECT first_name, email, fee, currency FROM students_new ORDER BY fee DESC limit 20;");
+        rs.absolute(5);
+        System.out.println("Students at number 5 row: " + rs.getString("first_name")+" " + rs.getString("email") +" "+ rs.getString("fee")
+        + rs.getString("currency"));
 
-}
+    }
+
+
+
+    }
